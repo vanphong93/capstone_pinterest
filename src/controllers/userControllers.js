@@ -1,12 +1,115 @@
+const { successCode, failCode, errorCode } = require("../config/reponse");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
+const bcrypt = require("bcrypt");
+const { parseToken } = require("../middlewares/baseToken");
+const users = require("../models/users");
 const models = init_models(sequelize);
 const getUser = async (req, res) => {
     try {
         let data = await models.users.findAll();
-        res.send(data);
+        successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
-        console.log("error: ", error);
+        errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { getUser };
+const singUp = async (req, res) => {
+    try {
+        let { email, pass_word, full_name, age, avatar } = req.body;
+        let passWordHash = bcrypt.hashSync(pass_word, 10);
+        let checkData = await models.users.findOne({
+            where: { email },
+        });
+        if (checkData) {
+            failCode(res, "", "Email đã tồn tại");
+        } else {
+            let data = await models.users.create({
+                email,
+                pass_word: passWordHash,
+                full_name,
+                age,
+                avatar,
+            });
+            successCode(res, data, "Đăng kí thành công");
+        }
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+const login = async (req, res) => {
+    try {
+        false;
+        let { email, pass_word } = req.body;
+        let checkLogin = await models.users.findOne({
+            where: { email },
+        });
+        if (checkLogin) {
+            let checkPass = bcrypt.compareSync(pass_word, checkLogin.pass_word);
+            if (checkPass) {
+                successCode(
+                    res,
+                    "",
+                    parseToken(pass_word),
+                    "Đăng nhập thành công"
+                );
+            } else {
+                failCode(res, "", "Pass word không đúng");
+            }
+        } else {
+            failCode(res, "", "Tài khoản không tồn tại");
+        }
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+const editUser = async (req, res) => {
+    try {
+        let { user_id } = req.params;
+        let { email, pass_word, full_name, age, avatar } = req.body;
+        let passWordHash = bcrypt.hashSync(pass_word, 10);
+        let checkData = await models.users.findOne({
+            where: { user_id },
+        });
+        if (checkData && checkData.email !== email) {
+            let checkEmail = await models.users.findOne({ where: { email } });
+            if (checkEmail) {
+                failCode(res, "", "Email đã đăng kí");
+                return;
+            }
+        }
+        if (checkData) {
+            let data = await models.users.update(
+                {
+                    pass_word: passWordHash,
+                    full_name,
+                    age,
+                    email,
+                    avatar,
+                },
+                { where: { user_id } }
+            );
+            successCode(res, data, "Tài khoản của bạn đã được cập nhật");
+        } else {
+            failCode(res, "", "Tài khoản không tồn tại");
+        }
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+const deleteUser = async (req, res) => {
+    try {
+        let { user_id } = req.params;
+        let checkData = await models.users.findOne({
+            where: { user_id },
+        });
+        if (checkData) {
+            let data = await models.users.destroy({ where: { user_id } });
+            successCode(res, data, "Xóa thành công");
+        } else {
+            failCode(res, "", "Tài khoản không tồn tại");
+        }
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+module.exports = { getUser, singUp, login, editUser, deleteUser };
