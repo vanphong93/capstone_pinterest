@@ -3,10 +3,11 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const bcrypt = require("bcrypt");
 const { parseToken } = require("../middlewares/baseToken");
-const users = require("../models/users");
+const db_host = require("../config/index");
 const models = init_models(sequelize);
 const getUser = async (req, res) => {
     try {
+        console.log(db_host);
         let data = await models.users.findAll();
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
@@ -64,7 +65,7 @@ const login = async (req, res) => {
 };
 const editUser = async (req, res) => {
     try {
-        let { user_id } = req.params;
+        let { id: user_id } = req.params;
         let { email, pass_word, full_name, age, avatar } = req.body;
         let passWordHash = bcrypt.hashSync(pass_word, 10);
         let checkData = await models.users.findOne({
@@ -98,7 +99,7 @@ const editUser = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
     try {
-        let { user_id } = req.params;
+        let { id: user_id } = req.params;
         let checkData = await models.users.findOne({
             where: { user_id },
         });
@@ -112,4 +113,33 @@ const deleteUser = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { getUser, singUp, login, editUser, deleteUser };
+const avatarUser = async (req, res) => {
+    const fs = require("fs");
+    try {
+        let { user_id } = req.params;
+        let { filename } = req.file;
+        let checkData = await models.users.findOne({
+            where: { user_id },
+        });
+        if (checkData) {
+            let { avatar: delete_avatar } = checkData.dataValues;
+            if (delete_avatar) {
+                setTimeout(() => {
+                    fs.unlinkSync(
+                        process.cwd() + "/public/avatar/" + delete_avatar
+                    );
+                }, 5000);
+            }
+            let data = await models.users.update(
+                { avatar: filename },
+                { where: { user_id } }
+            );
+            successCode(res, data, "update");
+        } else {
+            failCode(res, "", "Tài khoản không tồn tại");
+        }
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+module.exports = { getUser, singUp, login, editUser, deleteUser, avatarUser };
