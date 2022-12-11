@@ -19,7 +19,7 @@ const checkToken = (token) => {
     }
 };
 const verifyToken = (req, res, next) => {
-    const { token } = req.body;
+    let {token} = req.headers;
     const verifyToken = checkToken(token);
     if (verifyToken.checkData) {
         next();

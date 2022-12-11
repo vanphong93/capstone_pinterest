@@ -3,11 +3,9 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const bcrypt = require("bcrypt");
 const { parseToken } = require("../middlewares/baseToken");
-const db_host = require("../config/index");
 const models = init_models(sequelize);
 const getUser = async (req, res) => {
     try {
-        console.log(db_host);
         let data = await models.users.findAll();
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {

@@ -58,4 +58,25 @@ const deleteImage = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { getImages, uploadImage, deleteImage };
+const getImgByID = async (req, res) => {
+    try {
+        let { id: user_id } = req.params;
+        let checkId = await models.users.findOne({ where: { user_id } });
+        if (!checkId) {
+            failCode(res, "", "User không tồn tại");
+            return;
+        }
+        let checkData = await models.images.findAll({
+            where: { user_id },
+        });
+        if (checkData.length) {
+            successCode(res, checkData, "Lấy dữ liệu thành công");
+        } else {
+            failCode(res, "", "Không có dữ liệu");
+        }
+    } catch (error) {
+        console.log("error: ", error);
+        errorCode(res, "Lỗi sever");
+    }
+};
+module.exports = { getImages, uploadImage, deleteImage, getImgByID };
