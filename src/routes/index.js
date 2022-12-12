@@ -1,9 +1,11 @@
 const express = require("express");
 const commentRoute = require("./commentRoute");
 const imageRoute = require("./imageRoute");
+const saveRoute = require("./saveImageRoute");
 const userRoute = require("./userRoute");
 const rootRoute = express.Router();
 rootRoute.use("/user-management", userRoute);
 rootRoute.use("/image-management", imageRoute);
 rootRoute.use("/comment-management", commentRoute);
+rootRoute.use("/save-management", saveRoute);
 module.exports = rootRoute;

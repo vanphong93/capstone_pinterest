@@ -5,9 +5,21 @@ const bcrypt = require("bcrypt");
 const models = init_models(sequelize);
 const { parseToken } = require("../middlewares/baseToken");
 const fs = require("fs");
+const { Op } = require("sequelize");
 const getImages = async (req, res) => {
     try {
         let data = await models.images.findAll();
+        successCode(res, data, "Lấy dữ liệu thành công");
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+const searchImg = async (req, res) => {
+    try {
+        let { name } = req.query;
+        let data = await models.images.findAll({
+            where: { image_name: { [Op.like]: `%${name}%` } },
+        });
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
         errorCode(res, "Lỗi sever");
@@ -48,6 +60,7 @@ const deleteImage = async (req, res) => {
                     fs.unlinkSync(process.cwd() + "/public/img/" + URL);
                 }, 5000);
             }
+            // let data = await images.destroy({ where: { image_id } });
             let data = await models.images.destroy({ where: { image_id } });
             successCode(res, data, "Xóa thành công");
         } else {
@@ -58,19 +71,38 @@ const deleteImage = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-const getImgByID = async (req, res) => {
+const getImgByImgID = async (req, res) => {
+    try {
+        let { id: image_id } = req.params;
+        let data = await models.images.findOne({
+            where: { image_id },
+            include: [
+                {
+                    model: models.users,
+                    as: "user",
+                    attributes: { exclude: "pass_word" },
+                },
+            ],
+        });
+        if (!data) {
+            failCode(res, "", "Image không tồn tại");
+            return;
+        } else {
+            successCode(res, data, "Lấy dữ liệu thành công");
+        }
+    } catch (error) {
+        console.log("error: ", error);
+        errorCode(res, "Lỗi sever");
+    }
+};
+const getImgByUserId = async (req, res) => {
     try {
         let { id: user_id } = req.params;
-        let checkId = await models.users.findOne({ where: { user_id } });
-        if (!checkId) {
-            failCode(res, "", "User không tồn tại");
-            return;
-        }
-        let checkData = await models.images.findAll({
+        let data = await models.images.findAll({
             where: { user_id },
         });
-        if (checkData.length) {
-            successCode(res, checkData, "Lấy dữ liệu thành công");
+        if (data.length > 0) {
+            successCode(res, data, "Lấy dữ liệu thành công");
         } else {
             failCode(res, "", "Không có dữ liệu");
         }
@@ -79,4 +111,11 @@ const getImgByID = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { getImages, uploadImage, deleteImage, getImgByID };
+module.exports = {
+    getImages,
+    uploadImage,
+    deleteImage,
+    getImgByImgID,
+    getImgByUserId,
+    searchImg,
+};

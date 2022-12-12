@@ -3,7 +3,6 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const bcrypt = require("bcrypt");
 const { parseToken } = require("../middlewares/baseToken");
-const db_host = require("../config/index");
 const models = init_models(sequelize);
 const getComment = async (req, res) => {
     try {
