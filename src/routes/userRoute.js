@@ -6,11 +6,13 @@ const {
     editUser,
     deleteUser,
     avatarUser,
+    getUserById,
 } = require("../controllers/userControllers");
 const { verifyToken } = require("../middlewares/baseToken");
 const { avatar } = require("../middlewares/upload");
 const userRoute = express.Router();
-userRoute.get("/users",verifyToken, getUser);
+userRoute.get("/users", verifyToken, getUser);
+userRoute.get("/users/:id", getUserById);
 userRoute.post("/sing-up", singUp);
 userRoute.post("/login", login);
 userRoute.put("/user/:id", verifyToken, editUser);

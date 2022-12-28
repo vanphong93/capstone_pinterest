@@ -8,6 +8,6 @@ const {
 const commentRoute = express.Router();
 commentRoute.get("/comments", getComment);
 commentRoute.get("/comments/:id", getCommentByImg);
-commentRoute.delete("/comments", deleteComment);
+commentRoute.delete("/comments/:user_id/:image_id", deleteComment);
 commentRoute.post("/comments", createCommnet);
 module.exports = commentRoute;

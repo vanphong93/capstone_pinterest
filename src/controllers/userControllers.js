@@ -2,12 +2,25 @@ const { successCode, failCode, errorCode } = require("../config/reponse");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const bcrypt = require("bcrypt");
-const { parseToken } = require("../middlewares/baseToken");
+const { parseToken, jwt } = require("../middlewares/baseToken");
 const models = init_models(sequelize);
 const getUser = async (req, res) => {
     try {
         let data = await models.users.findAll();
         successCode(res, data, "Lấy dữ liệu thành công");
+    } catch (error) {
+        errorCode(res, "Lỗi sever");
+    }
+};
+const getUserById = async (req, res) => {
+    try {
+        let { id: user_id } = req.params;
+        let data = await models.users.findOne({ user_id });
+        if (data) {
+            successCode(res, data, "Lấy dữ liệu thành công");
+        } else {
+            failCode(res, "", "Tài khoản không tồn tại");
+        }
     } catch (error) {
         errorCode(res, "Lỗi sever");
     }
@@ -47,8 +60,10 @@ const login = async (req, res) => {
             if (checkPass) {
                 successCode(
                     res,
-                    "",
-                    parseToken(pass_word),
+                    {
+                        user_id: checkLogin.user_id,
+                        token: parseToken(pass_word),
+                    },
                     "Đăng nhập thành công"
                 );
             } else {
@@ -140,4 +155,12 @@ const avatarUser = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { getUser, singUp, login, editUser, deleteUser, avatarUser };
+module.exports = {
+    getUser,
+    getUserById,
+    singUp,
+    login,
+    editUser,
+    deleteUser,
+    avatarUser,
+};

@@ -8,8 +8,8 @@ const parseToken = (data) => {
 };
 const checkToken = (token) => {
     try {
-        let check = jwt.verify(token, "cyber");
-        if (check) {
+        let decode = jwt.verify(token, "cyber");
+        if (decode) {
             return { checkData: true, messagse: "" };
         } else {
             return { checkData: false, messagse: "Token không hợp lệ" };
@@ -19,7 +19,7 @@ const checkToken = (token) => {
     }
 };
 const verifyToken = (req, res, next) => {
-    let {token} = req.headers;
+    let { token } = req.headers;
     const verifyToken = checkToken(token);
     if (verifyToken.checkData) {
         next();
@@ -27,4 +27,4 @@ const verifyToken = (req, res, next) => {
         res.status(401).send(verifyToken.messagse);
     }
 };
-module.exports = { verifyToken, checkToken, parseToken };
+module.exports = { verifyToken, checkToken, parseToken, jwt };

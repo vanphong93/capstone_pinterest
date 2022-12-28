@@ -39,6 +39,7 @@ const getSaveById = async (req, res) => {
         let { id: user_id } = req.params;
         let data = await models.image_save.findAll({
             where: { user_id },
+            include: ["image"],
         });
         if (data.length > 0) {
             successCode(res, data, "thành công");
@@ -52,7 +53,7 @@ const getSaveById = async (req, res) => {
 };
 const deleteSave = async (req, res) => {
     try {
-        let { user_id, image_id } = req.body;
+        let { user_id, image_id } = req.params;
         let data = await models.image_save.destroy({
             where: { user_id, image_id },
         });
@@ -66,4 +67,4 @@ const deleteSave = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { createSave, getSaveById, deleteSave,getDataSave };
+module.exports = { createSave, getSaveById, deleteSave, getDataSave };

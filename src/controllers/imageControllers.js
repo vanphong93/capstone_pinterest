@@ -27,22 +27,23 @@ const searchImg = async (req, res) => {
 };
 const uploadImage = async (req, res) => {
     try {
-        let {
-            filename: URL,
-            image_name,
-            description,
-            data_created,
-            user_id,
-        } = {
+        let { filename, image_name, description, data_created, user_id } = {
             ...req.body,
             ...req.file,
         };
+        let fullUrl =
+            req.protocol +
+            "://" +
+            req.get("host") +
+            req.originalUrl +
+            "/" +
+            filename;
         let data = await models.images.create({
             image_name,
             description,
             data_created,
             user_id,
-            URL,
+            URL: fullUrl,
         });
         successCode(res, data, "success");
     } catch (error) {
@@ -60,7 +61,6 @@ const deleteImage = async (req, res) => {
                     fs.unlinkSync(process.cwd() + "/public/img/" + URL);
                 }, 5000);
             }
-            // let data = await images.destroy({ where: { image_id } });
             let data = await models.images.destroy({ where: { image_id } });
             successCode(res, data, "Xóa thành công");
         } else {

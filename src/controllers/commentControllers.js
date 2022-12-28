@@ -18,12 +18,15 @@ const getCommentByImg = async (req, res) => {
         let { id: image_id } = req.params;
         let data = await models.comments.findAll({
             where: { image_id },
+            include: [
+                {
+                    model: models.users,
+                    as: "user",
+                    attributes: ["full_name","avatar"],
+                },
+            ],
         });
-        if (data.length > 0) {
-            successCode(res, data, "Lấy dữ liệu thành công");
-        } else {
-            failCode(res, data, "Không có dữ liệu");
-        }
+        successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
         console.log("error: ", error);
         errorCode(res, "Lỗi sever");
@@ -31,7 +34,7 @@ const getCommentByImg = async (req, res) => {
 };
 const deleteComment = async (req, res) => {
     try {
-        let { user_id, image_id } = req.body;
+        let { user_id, image_id } = req.params;
         let data = await models.comments.destroy({
             where: { user_id, image_id },
         });
@@ -47,12 +50,12 @@ const deleteComment = async (req, res) => {
 };
 const createCommnet = async (req, res) => {
     try {
-        let { user_id, image_id, content, comment_date } = req.body;
+        let { user_id, image_id, content } = req.body;
         let data = await models.comments.create({
             user_id,
             image_id,
             content,
-            comment_date,
+            comment_date: new Date(),
         });
 
         successCode(res, data, "thành công");
