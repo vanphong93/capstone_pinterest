@@ -19,12 +19,13 @@ const checkToken = (token) => {
     }
 };
 const verifyToken = (req, res, next) => {
-    let { token } = req.headers;
-    const verifyToken = checkToken(token);
-    if (verifyToken.checkData) {
-        next();
-    } else {
-        res.status(401).send(verifyToken.messagse);
-    }
+    // let { token } = req.headers;
+    // const verifyToken = checkToken(token);
+    // if (verifyToken.checkData) {
+    //     next();
+    // } else {
+    //     res.status(401).send(verifyToken.messagse);
+    // }
+    next();
 };
 module.exports = { verifyToken, checkToken, parseToken, jwt };

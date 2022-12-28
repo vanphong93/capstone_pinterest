@@ -1,10 +1,18 @@
 const express = require("express");
-const path = require("path");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger/configuration/swagger");
+// const path = require("path");
 const app = express();
-app.use(express.json());
-app.use(express.static("."));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const cors = require("cors");
 const rootRoute = require("./routes");
+app.use(express.json());
+app.use(express.static("."));
 app.use(cors());
-app.listen(8080, () => console.log("sever 8080 is running"));
 app.use("/api", rootRoute);
+const server = app.listen(process.env.PORT || 8080, () => {
+
+    console.log(`'Listening on port '${server.address().port}`);
+  });
+  
+

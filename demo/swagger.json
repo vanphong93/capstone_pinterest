@@ -1,0 +1,195 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "",
+        "title": "Pinterest Project CRUD"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
+    ],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/user-management/sing-up": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create new user in system",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-management/login": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Login User",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "required": ["pass_word", "email"],
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "example": "leVanTi@gmail.com"
+                                },
+                                "pass_word": {
+                                    "type": "string",
+                                    "example": "1234"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user-management/users": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user-management/user/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "summary": "Get user with given ID",
+                "tags": ["Users"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user with given ID",
+                "tags": ["Users"],
+                "responses": {
+                    "200": {
+                        "description": "User is deleted"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user with give ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "description": "User with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/updateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is updated",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": ["email", "full_name", "pass_word"],
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "email": {
+                    "type": "string",
+                    "example": "leVanTi@gmail.com"
+                },
+                "pass_word": {
+                    "type": "string",
+                    "example": "1234"
+                },
+                "full_name": {
+                    "type": "string",
+                    "example": "Le Van Ti"
+                },
+                "age": {
+                    "type": "integer",
+                    "example": 20
+                },
+                "avatar": {
+                    "type": "string",
+                    "example": "https://picsum.photos/200/300.jpg"
+                }
+            }
+        },
+        "updateUser": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "leVanTi@gmail.com"
+                },
+                "pass_word": {
+                    "type": "string",
+                    "example": "1234"
+                },
+                "full_name": {
+                    "type": "string",
+                    "example": "Le Van Ti"
+                },
+                "age": {
+                    "type": "integer",
+                    "example": 20
+                },
+                "avatar": {
+                    "type": "string",
+                    "example": "https://picsum.photos/200/300.jpg"
+                }
+            }
+        }
+    }
+}

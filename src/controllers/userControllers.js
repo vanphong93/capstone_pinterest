@@ -79,7 +79,7 @@ const login = async (req, res) => {
 const editUser = async (req, res) => {
     try {
         let { id: user_id } = req.params;
-        let { email, pass_word, full_name, age, avatar } = req.body;
+        let { email, pass_word, full_name, age } = req.body;
         let passWordHash = bcrypt.hashSync(pass_word, 10);
         let checkData = await models.users.findOne({
             where: { user_id },
@@ -123,7 +123,7 @@ const deleteUser = async (req, res) => {
             failCode(res, "", "Tài khoản không tồn tại");
         }
     } catch (error) {
-        errorCode(res, "Lỗi sever");
+        errorCode(res, "Không thể xóa hoặc lỗi sever");
     }
 };
 const avatarUser = async (req, res) => {

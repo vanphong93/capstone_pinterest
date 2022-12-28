@@ -1,0 +1,52 @@
+paths:
+    /user-management/sign-up:
+        post:
+            tags:
+                - User
+            summary: creates a new user
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: sign up
+                  description: It enables a user to create an account
+                  required: true
+                  schema:
+                      $ref: "#/definitions/signUp"
+            responses:
+                200:
+                    description: OK
+    /user-management/users:
+        get:
+            tags:
+                - User
+            summary: Get all users in system
+            responses:
+                200:
+                    description: OK
+definitions:
+    signUp:
+        required:
+            - full_name
+            - email
+            - age
+            - password
+        properties:
+            user_id:
+                type: integer
+                uniqueItems: true
+                auto: true
+            full_name:
+                type: string
+            email:
+                type: string
+                example: phongckm93@gmail.com
+            age:
+                type: integer
+                example: 25
+            password:
+                type: string
+                example: "1234"
+            avatar:
+                type: string
+                example: https://picsum.photos/200/300.jpg
