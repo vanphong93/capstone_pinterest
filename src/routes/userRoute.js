@@ -12,7 +12,7 @@ const { verifyToken } = require("../middlewares/baseToken");
 const { avatar } = require("../middlewares/upload");
 const userRoute = express.Router();
 userRoute.get("/users", verifyToken, getUser);
-userRoute.get("/user/:id", getUserById);
+userRoute.get("/user/:id",verifyToken, getUserById);
 userRoute.post("/sign-up", singUp);
 userRoute.post("/login", login);
 userRoute.put("/user/:id", verifyToken, editUser);
@@ -29,7 +29,7 @@ userRoute.get("/profile/:avatar", (req, res) => {
     });
 });
 userRoute.post(
-    "/user/avatar/:user_id",
+    "/avatar/:id",
     avatar.single("dataUpload"),
     avatarUser
 );

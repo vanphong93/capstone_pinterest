@@ -7,7 +7,7 @@ const swaggerDefinition = {
         description: "This is the REST API for my Project",
     },
     host: "localhost:8080",
-    basePath: "/api", 
+    basePath: "/api",
 };
 
 const options = {

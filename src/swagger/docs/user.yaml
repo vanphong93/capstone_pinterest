@@ -16,11 +16,78 @@ paths:
             responses:
                 200:
                     description: OK
+    /user-management/login:
+        post:
+            tags:
+                - User
+            summary: Login User
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: Login
+                  required: true
+                  schema:
+                      $ref: "#/definitions/login"
+            responses:
+                200:
+                    description: OK
     /user-management/users:
         get:
             tags:
                 - User
             summary: Get all users in system
+            responses:
+                200:
+                    description: OK
+            security:
+                - ApiKeyAuth: []
+    /user-management/user/{id}:
+        parameters:
+            - in: path
+              name: id
+              type: integer
+              description: ID of user that we want to find
+              required: true
+        get:
+            tags:
+                - User
+            summary: Get user with given ID
+            responses:
+                200:
+                    description: OK
+            security:
+                - ApiKeyAuth: []
+        put:
+            tags:
+                - User
+            summary: Update user with give ID
+            parameters:
+            - in: body
+              name: user
+              description: User with new values of properties
+              required: true
+              schema: 
+                 $ref: "#/definitions/updateUser"
+            responses:
+                200:
+                    description: OK
+            security:
+                - ApiKeyAuth: []
+    /user-management/avatar/{id}:
+        post:
+            tags:
+                - User
+            summary: creates a new user
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: sign up
+                  description: It enables a user to create an account
+                  required: true
+                  schema:
+                      $ref: "#/definitions/signUp"
             responses:
                 200:
                     description: OK
@@ -44,9 +111,34 @@ definitions:
             age:
                 type: integer
                 example: 25
-            password:
+            pass_word:
                 type: string
                 example: "1234"
+    updateUser:
+        properties:
+            full_name:
+                type: string
+            email:
+                type: string
+            age:
+                type: integer
+            pass_word:
+                type: string
             avatar:
                 type: string
-                example: https://picsum.photos/200/300.jpg
+    login:
+        required:
+            - email
+            - pass_word
+        properties:
+            email:
+                type: string
+                example: phongckm93@gmail.com
+            pass_word:
+                type: string
+                example: "1234"
+securityDefinitions:
+      ApiKeyAuth:
+        type: apiKey
+        in: header
+        name: token      

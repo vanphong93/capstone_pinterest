@@ -56,11 +56,15 @@ const deleteImage = async (req, res) => {
         let checkData = await models.images.findOne({ where: { image_id } });
         if (checkData) {
             let { URL } = checkData.dataValues;
-            if (URL) {
-                setTimeout(() => {
-                    fs.unlinkSync(process.cwd() + "/public/img/" + URL);
-                }, 5000);
-            }
+            let splitURL =
+                req.protocol +
+                "://" +
+                req.get("host") +
+                "/api/image-management/upload/";
+            URL = URL.replace(splitURL, "");
+            setTimeout(() => {
+                fs.unlinkSync(process.cwd() + "/public/img/" + URL);
+            }, 5000);
             let data = await models.images.destroy({ where: { image_id } });
             successCode(res, data, "Xóa thành công");
         } else {
