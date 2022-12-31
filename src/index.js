@@ -10,6 +10,6 @@ app.use(express.json());
 app.use(express.static("."));
 app.use(cors());
 app.use("/api", rootRoute);
-const server = app.listen( 8080, () => {
-    console.log(`'Listening on port '${server.address().port}`);
+ app.listen( 8080, () => {
+    console.log(`'Listening on port 8080`);
 });

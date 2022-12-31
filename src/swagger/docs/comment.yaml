@@ -12,6 +12,8 @@ paths:
                   required: true
                   schema:
                       $ref: "#/definitions/Comment"
+            security:
+                - ApiKeyAuth: []
             responses:
                 200:
                     description: OK
@@ -22,8 +24,6 @@ paths:
             responses:
                 200:
                     description: OK
-            security:
-                - ApiKeyAuth: []
     /comment-management/comments/{id}:
         parameters:
             - in: path

@@ -65,15 +65,26 @@ const deleteImage = async (req, res) => {
                 "/api/image-management/upload/";
             URL = URL.replace(splitURL, "");
             setTimeout(() => {
-                fs.unlinkSync(process.cwd() + "/public/img/" + URL);
+                fs.unlink(process.cwd() + "/public/img/" + URL, (err) => {
+                    return;
+                });
             }, 5000);
-            let data = await models.images.destroy({ where: { image_id } });
-            successCode(res, data, "Xóa thành công");
+            models.images
+                .destroy({ where: { image_id } })
+                .then(() => {
+                    successCode(res, "", "Xóa thành công");
+                })
+                .catch(() => {
+                    failCode(
+                        res,
+                        "",
+                        "Ảnh không thể xóa do có bình luận hoặc được người khác lưu"
+                    );
+                });
         } else {
             failCode(res, "", "Ảnh không tồn tại");
         }
     } catch (error) {
-
         errorCode(res, "Lỗi sever");
     }
 };
@@ -97,7 +108,6 @@ const getImgByImgID = async (req, res) => {
             successCode(res, data, "Lấy dữ liệu thành công");
         }
     } catch (error) {
-
         errorCode(res, "Lỗi sever");
     }
 };
@@ -113,7 +123,6 @@ const getImgByUserId = async (req, res) => {
             failCode(res, "", "Không có dữ liệu");
         }
     } catch (error) {
-
         errorCode(res, "Lỗi sever");
     }
 };

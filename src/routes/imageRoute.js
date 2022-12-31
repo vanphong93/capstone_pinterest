@@ -26,5 +26,5 @@ imageRoute.get("/upload/:image", (req, res) => {
         }
     });
 });
-imageRoute.post("/upload", upload.single("dataUpload"), uploadImage);
+imageRoute.post("/upload", upload.single("dataUpload"),verifyToken, uploadImage);
 module.exports = imageRoute;

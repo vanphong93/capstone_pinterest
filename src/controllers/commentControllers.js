@@ -9,7 +9,6 @@ const getComment = async (req, res) => {
         let data = await models.comments.findAll();
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
-
         errorCode(res, "Lỗi sever");
     }
 };
@@ -28,7 +27,6 @@ const getCommentByImg = async (req, res) => {
         });
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
-
         errorCode(res, "Lỗi sever");
     }
 };
@@ -44,23 +42,27 @@ const deleteComment = async (req, res) => {
             failCode(res, data, "Không tồn tại");
         }
     } catch (error) {
-
         errorCode(res, "Lỗi sever");
     }
 };
 const createCommnet = async (req, res) => {
     try {
         let { user_id, image_id, content } = req.body;
-        let data = await models.comments.create({
-            user_id,
-            image_id,
-            content,
-            comment_date: new Date(),
-        });
-
-        successCode(res, data, "thành công");
+        models.comments
+            .create({
+                user_id,
+                image_id,
+                content,
+                comment_date: new Date(),
+            })
+            .then((result) => {
+                successCode(res, result, "thành công");
+            })
+            .catch((err) => {
+                failCode(res, "", "kiểm tra Id tồn tại");
+            });
     } catch (error) {
-        errorCode(res, "Lỗi sever,kiểm tra Id tồn tại");
+        errorCode(res, "Lỗi sever");
     }
 };
 

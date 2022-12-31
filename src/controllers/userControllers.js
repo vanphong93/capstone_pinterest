@@ -124,13 +124,19 @@ const deleteUser = async (req, res) => {
             where: { user_id },
         });
         if (checkData) {
-            let data = await models.users.destroy({ where: { user_id } });
-            successCode(res, data, "Xóa thành công");
+            models.users
+                .destroy({ where: { user_id } })
+                .then((result) => {
+                    successCode(res, "", "Xóa thành công");
+                })
+                .catch((error) => {
+                    failCode(res, "", "Tài không thể xóa do đã upload ảnh");
+                });
         } else {
             failCode(res, "", "Tài khoản không tồn tại");
         }
-    } catch (error) {
-        errorCode(res, "Không thể xóa hoặc lỗi sever");
+    } catch (err) {
+        errorCode(res, "Lỗi sever");
     }
 };
 const avatarUser = async (req, res) => {
@@ -149,8 +155,13 @@ const avatarUser = async (req, res) => {
             if (delete_avatar) {
                 delete_avatar = delete_avatar.replace(Url, "");
                 setTimeout(() => {
-                    fs.unlinkSync(
-                        process.cwd() + "/public/avatar/" + delete_avatar
+                    fs.unlink(
+                        process.cwd() + "/public/avatar/" + delete_avatar,
+                        (err) => {
+                            if (err) {
+                                return;
+                            }
+                        }
                     );
                 }, 5000);
             }
@@ -164,7 +175,7 @@ const avatarUser = async (req, res) => {
             fs.unlinkSync(process.cwd() + "/public/avatar/" + filename);
         }
     } catch (error) {
-        errorCode(res, "lỗi");
+        errorCode(res, "lỗi sever");
     }
 };
 module.exports = {

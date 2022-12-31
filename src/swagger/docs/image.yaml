@@ -22,6 +22,8 @@ paths:
             responses:
                 200:
                     description: OK
+            security:
+                - ApiKeyAuth: []
     /image-management/images:
         get:
             tags:

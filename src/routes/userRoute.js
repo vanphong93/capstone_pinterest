@@ -17,7 +17,7 @@ userRoute.post("/sign-up", singUp);
 userRoute.post("/login", login);
 userRoute.put("/user/:id", verifyToken, editUser);
 userRoute.delete("/user/:id", verifyToken, deleteUser);
-userRoute.post("/avatar/:id", avatar.single("dataUpload"), avatarUser);
+userRoute.post("/avatar/:id", avatar.single("dataUpload"), verifyToken,avatarUser);
 userRoute.get("/avatar/:id/:file", (req, res) => {
     let { file } = req.params;
     let url = `${process.cwd()}/public/avatar/${file}`;

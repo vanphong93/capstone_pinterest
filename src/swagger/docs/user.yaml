@@ -105,6 +105,8 @@ paths:
             responses:
                 200:
                     description: OK
+            security:
+                - ApiKeyAuth: []
 definitions:
     signUp:
         required:
