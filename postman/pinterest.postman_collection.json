@@ -1,0 +1,725 @@
+{
+	"info": {
+		"_postman_id": "6d7b958f-755e-4006-a035-a6f1f4061328",
+		"name": "pinterest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23041773"
+	},
+	"item": [
+		{
+			"name": "sing up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"van_phong12@gmail.com\",\n  \"pass_word\":\"1234\",\n  \"full_name\":\"nguyen van ti\",\n  \"age\":12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/user-management/sign-up",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"phongckm93@gmail.com\",\n  \"pass_word\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/user-management/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data user by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3ODIxNywiZXhwIjoxNzA0MDM1ODE3fQ.brbo3Af6Y1a2UD9cVW7lV4Fi5LdD2f_kXK-lg0hrnVY"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/user-management/user/3",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MDc3NDI2NiwiZXhwIjoxNzAyMzMxODY2fQ.DlBfYmmR45G28PB4wcNOkFuyuBpvZcxC0Hl4gpVcILM"
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/user-management/user",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MTEyMTU1MywiZXhwIjoxNzAyNjc5MTUzfQ.H-qRl56y15RdG-XWUsIolNXd7VfDJXGyYyUGozx7cWg"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"phongckm93@gmail.com\",\n  \"pass_word\": \"1234\",\n  \"full_name\": \"nguyen van nam\",\n  \"age\": 29,\n  \"avatar\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/user-management/user/3",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNDU2IiwiaWF0IjoxNjcwNjgxMjcxLCJleHAiOjE3MDIyMzg4NzF9.5eukDOzvKq2bmo1JrA-QYJA4tM4xtIVXqn7Byn7sIlk"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/user-management/user/14",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "avatar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNDU2IiwiaWF0IjoxNjcwNjgxMjcxLCJleHAiOjE3MDIyMzg4NzF9.5eukDOzvKq2bmo1JrA-QYJA4tM4xtIVXqn7Byn7sIlk"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "dataUpload",
+							"type": "file",
+							"src": "AYu434Rqe/1 (15).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/user-management/avatar/3",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"avatar",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view avatar",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/user-management/avatar/3/1672482149445_1 (15).png",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"user-management",
+						"avatar",
+						"3",
+						"1672482149445_1 (15).png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/image-management/images",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get image by user_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/image-management/user/3",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"user",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get image by ID image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/image-management/images/50",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"images",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "description",
+							"value": "anh khong dep",
+							"type": "default"
+						},
+						{
+							"key": "image_name",
+							"value": "new image new",
+							"type": "default"
+						},
+						{
+							"key": "user_id",
+							"value": "3",
+							"type": "default"
+						},
+						{
+							"key": "dataUpload",
+							"type": "file",
+							"src": "W5KlGMB7o/1 (7).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/image-management/upload",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view img",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/image-management/upload/1672482248357_1 (7).png",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"upload",
+						"1672482248357_1 (7).png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/image-management/images/search?name=new",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"images",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "new"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "image delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNDU2IiwiaWF0IjoxNjcwNjgxMjcxLCJleHAiOjE3MDIyMzg4NzF9.5eukDOzvKq2bmo1JrA-QYJA4tM4xtIVXqn7Byn7sIlk"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/image-management/images/52",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"image-management",
+						"images",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data comments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3OTQ5MywiZXhwIjoxNzA0MDM3MDkzfQ.fHZVqIqL02MJbJRIezqmI1IX4fhg6FqrNOlcWcoweo4"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/comment-management/comments",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comment-management",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get comment by id img",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/comment-management/comments/50",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comment-management",
+						"comments",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3OTQ5MywiZXhwIjoxNzA0MDM3MDkzfQ.fHZVqIqL02MJbJRIezqmI1IX4fhg6FqrNOlcWcoweo4"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user_id\":3,\"image_id\":50,\"content\":\"lorem kiem tra thong tin\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/comment-management/comments",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comment-management",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete comment",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3OTQ5MywiZXhwIjoxNzA0MDM3MDkzfQ.fHZVqIqL02MJbJRIezqmI1IX4fhg6FqrNOlcWcoweo4"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 2,\n  \"image_id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/comment-management/comments/28",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comment-management",
+						"comments",
+						"28"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3OTk4NSwiZXhwIjoxNzA0MDM3NTg1fQ.VLdei-lBgljNw6ZkFIl-tSnQmrOtzbMpupnVr7tI-jM"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\":3,\n  \"image_id\":54,\n  \"save_day\":\"2022-12-12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/save-management/save",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"save-management",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get save by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3OTk4NSwiZXhwIjoxNzA0MDM3NTg1fQ.VLdei-lBgljNw6ZkFIl-tSnQmrOtzbMpupnVr7tI-jM"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/save-management/save/3",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"save-management",
+						"save",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete save user ID and image ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MjQ3OTk4NSwiZXhwIjoxNzA0MDM3NTg1fQ.VLdei-lBgljNw6ZkFIl-tSnQmrOtzbMpupnVr7tI-jM"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/save-management/save/3/52",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"save-management",
+						"save",
+						"3",
+						"52"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		}
+	]
+}

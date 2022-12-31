@@ -20,7 +20,7 @@ const createSave = async (req, res) => {
             successCode(res, data, "thành công");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever,kiểm tra id tồn tại");
     }
 };
@@ -37,7 +37,7 @@ const getSaveById = async (req, res) => {
             failCode(res, "", "Không có dữ liệu");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
@@ -50,10 +50,10 @@ const deleteSave = async (req, res) => {
         if (data) {
             successCode(res, data, "thành công");
         } else {
-            failCode(res, "", "Không có dữ liệu");
+            failCode(res, "", "Không có dữ liệu,kiểm tra Id tồn tại");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };

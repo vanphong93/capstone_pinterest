@@ -6,8 +6,9 @@ const {
     createCommnet,
 } = require("../controllers/commentControllers");
 const commentRoute = express.Router();
-commentRoute.get("/comments", getComment);
+const { verifyToken } = require("../middlewares/baseToken");
+commentRoute.get("/comments", verifyToken, getComment);
 commentRoute.get("/comments/:id", getCommentByImg);
-commentRoute.delete("/comments/:id", deleteComment);
-commentRoute.post("/comments", createCommnet);
+commentRoute.delete("/comments/:id", verifyToken, deleteComment);
+commentRoute.post("/comments", verifyToken, createCommnet);
 module.exports = commentRoute;

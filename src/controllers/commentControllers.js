@@ -9,7 +9,7 @@ const getComment = async (req, res) => {
         let data = await models.comments.findAll();
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
@@ -28,7 +28,7 @@ const getCommentByImg = async (req, res) => {
         });
         successCode(res, data, "Lấy dữ liệu thành công");
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
@@ -44,7 +44,7 @@ const deleteComment = async (req, res) => {
             failCode(res, data, "Không tồn tại");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
@@ -60,8 +60,7 @@ const createCommnet = async (req, res) => {
 
         successCode(res, data, "thành công");
     } catch (error) {
-        console.log("error: ", error);
-        errorCode(res, "Lỗi sever");
+        errorCode(res, "Lỗi sever,kiểm tra Id tồn tại");
     }
 };
 

@@ -11,7 +11,7 @@ const {
 const { verifyToken } = require("../middlewares/baseToken");
 const { avatar } = require("../middlewares/upload");
 const userRoute = express.Router();
-userRoute.get("/users", verifyToken, getUser);
+userRoute.get("/user", verifyToken, getUser);
 userRoute.get("/user/:id", verifyToken, getUserById);
 userRoute.post("/sign-up", singUp);
 userRoute.post("/login", login);

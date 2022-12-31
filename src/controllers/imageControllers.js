@@ -49,7 +49,7 @@ const uploadImage = async (req, res) => {
         });
         successCode(res, data, "success");
     } catch (error) {
-        errorCode(res, "Lỗi sever");
+        errorCode(res, "Lỗi sever,kiểm tra Id tồn tại");
     }
 };
 const deleteImage = async (req, res) => {
@@ -73,7 +73,7 @@ const deleteImage = async (req, res) => {
             failCode(res, "", "Ảnh không tồn tại");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
@@ -97,7 +97,7 @@ const getImgByImgID = async (req, res) => {
             successCode(res, data, "Lấy dữ liệu thành công");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
@@ -113,7 +113,7 @@ const getImgByUserId = async (req, res) => {
             failCode(res, "", "Không có dữ liệu");
         }
     } catch (error) {
-        console.log("error: ", error);
+
         errorCode(res, "Lỗi sever");
     }
 };
