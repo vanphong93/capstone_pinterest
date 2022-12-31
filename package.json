@@ -4,8 +4,6 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "test": "pm2 start src/index.js",
-        "stop": "pm2 stop src/index.js",
         "start": "nodemon start src/index.js"
     },
     "dependencies": {
