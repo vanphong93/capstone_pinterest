@@ -2,7 +2,7 @@ const { successCode, failCode, errorCode } = require("../config/reponse");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const bcrypt = require("bcrypt");
-const { parseToken, jwt } = require("../middlewares/baseToken");
+const { parseToken } = require("../middlewares/baseToken");
 const models = init_models(sequelize);
 const getUser = async (req, res) => {
     try {
@@ -15,7 +15,8 @@ const getUser = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         let { id: user_id } = req.params;
-        let data = await models.users.findOne({ user_id });
+        console.log("user_id: ", user_id);
+        let data = await models.users.findOne({ where: { user_id } });
         if (data) {
             successCode(res, data, "Lấy dữ liệu thành công");
         } else {
