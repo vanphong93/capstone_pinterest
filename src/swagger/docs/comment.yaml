@@ -22,6 +22,8 @@ paths:
             responses:
                 200:
                     description: OK
+            security:
+                - ApiKeyAuth: []
     /comment-management/comments/{id}:
         parameters:
             - in: path
@@ -44,6 +46,8 @@ paths:
             responses:
                 200:
                     description: OK
+            security:
+                - ApiKeyAuth: []
 definitions:
     Comment:
         required:

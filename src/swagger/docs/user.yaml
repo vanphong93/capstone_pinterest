@@ -32,7 +32,7 @@ paths:
             responses:
                 200:
                     description: OK
-    /user-management/users:
+    /user-management/user:
         get:
             tags:
                 - User
@@ -74,6 +74,16 @@ paths:
                     description: OK
             security:
                 - ApiKeyAuth: []
+        delete:
+            tags:
+                - User
+            summary: Delete user by ID
+            responses:
+                200:
+                    description: OK
+            security:
+                - ApiKeyAuth: []
+
     /user-management/avatar/{id}:
         parameters:
             - in: path
