@@ -1,24 +1,14 @@
 const { successCode, failCode, errorCode } = require("../config/reponse");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
-const bcrypt = require("bcrypt");
-const { parseToken } = require("../middlewares/baseToken");
 const models = init_models(sequelize);
-const getDataSave = async (req, res) => {
-    try {
-        let data = await models.image_save.findAll();
-        successCode(res, data, "thành công");
-    } catch (error) {
-        console.log("error: ", error);
-        errorCode(res, "Lỗi sever");
-    }
-};
 const createSave = async (req, res) => {
     try {
-        let { user_id, image_id, save_day } = req.body;
+        let { user_id, image_id } = req.body;
         let checkDulicate = await models.image_save.findOne({
             where: { user_id, image_id },
         });
+        let save_day = new Date();
         if (checkDulicate) {
             failCode(res, "", "Ảnh đã save");
         } else {
@@ -31,7 +21,7 @@ const createSave = async (req, res) => {
         }
     } catch (error) {
         console.log("error: ", error);
-        errorCode(res, "Lỗi sever");
+        errorCode(res, "Lỗi sever,kiểm tra id tồn tại");
     }
 };
 const getSaveById = async (req, res) => {
@@ -67,4 +57,4 @@ const deleteSave = async (req, res) => {
         errorCode(res, "Lỗi sever");
     }
 };
-module.exports = { createSave, getSaveById, deleteSave, getDataSave };
+module.exports = { createSave, getSaveById, deleteSave };

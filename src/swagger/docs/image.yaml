@@ -1,0 +1,82 @@
+paths:
+    /image-management/upload:
+        parameters:
+            - in: formData
+              name: user_id
+              type: integer
+              required: true
+            - in: formData
+              name: description
+              required: true
+            - in: formData
+              name: image_name
+              required: true
+            - in: formData
+              name: dataUpload
+              type: file
+              required: true
+        post:
+            tags:
+                - Image
+            summary: Upload image
+            responses:
+                200:
+                    description: OK
+    /image-management/images:
+        get:
+            tags:
+                - Image
+            summary: Get list image
+            responses:
+                200:
+                    description: OK
+    /image-management/images/search:
+        parameters:
+            - in: query
+              name: name
+              description: Name of image
+              required: true
+        get:
+            tags:
+                - Image
+            summary: Find image
+            responses:
+                200:
+                    description: OK
+    /image-management/user/{id}:
+        parameters:
+            - in: path
+              name: id
+              type: integer
+              description: ID of user
+              required: true
+        get:
+            tags:
+                - Image
+            summary: Get list image upload by user
+            responses:
+                200:
+                    description: OK
+    /image-management/images/{id}:
+        parameters:
+            - in: path
+              name: id
+              type: integer
+              description: ID of image
+              required: true
+        get:
+            tags:
+                - Image
+            summary: Get image by Image ID
+            responses:
+                200:
+                    description: OK
+        delete:
+            tags:
+                - Image
+            summary: Delete image by Image ID
+            responses:
+                200:
+                    description: OK
+            security:
+                - ApiKeyAuth: []

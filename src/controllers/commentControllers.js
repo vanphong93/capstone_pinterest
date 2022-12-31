@@ -22,7 +22,7 @@ const getCommentByImg = async (req, res) => {
                 {
                     model: models.users,
                     as: "user",
-                    attributes: ["full_name","avatar"],
+                    attributes: ["full_name", "avatar"],
                 },
             ],
         });
@@ -34,9 +34,9 @@ const getCommentByImg = async (req, res) => {
 };
 const deleteComment = async (req, res) => {
     try {
-        let { user_id, image_id } = req.params;
+        let { id: comment_id } = req.params;
         let data = await models.comments.destroy({
-            where: { user_id, image_id },
+            where: { comment_id },
         });
         if (data) {
             successCode(res, data, "Xóa thành công");

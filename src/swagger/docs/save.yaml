@@ -1,0 +1,60 @@
+paths:
+    /save-management/save:
+        post:
+            tags:
+                - Save
+            summary: Save image
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: content
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Save"
+            responses:
+                200:
+                    description: OK
+    /save-management/save/{id}:
+        parameters:
+            - in: path
+              name: id
+              type: integer
+              required: true
+        get:
+            tags:
+                - Save
+            summary: Get list save  by user id
+            description: ID of user
+            responses:
+                200:
+                    description: OK
+    /save-management/save/{user-id}/{image-id}:
+        parameters:
+            - in: path
+              name: user-id
+              description: Id of user
+              type: integer
+              required: true
+            - in: path
+              name: image-id
+              description: Id of image
+              type: integer
+              required: true
+        delete:
+            tags:
+                - Save
+            summary: Remove save
+            responses:
+                200:
+                    description: OK
+definitions:
+    Save:
+        required:
+            - user_id
+            - image_id
+        properties:
+            user_id:
+                type: integer
+            image_id:
+                type: integer

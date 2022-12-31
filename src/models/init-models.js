@@ -10,10 +10,8 @@ function initModels(sequelize) {
   const images = _images(sequelize, DataTypes);
   const users = _users(sequelize, DataTypes);
 
-  images.belongsToMany(users, { as: 'user_id_users', through: comments, foreignKey: "image_id", otherKey: "user_id" });
-  images.belongsToMany(users, { as: 'user_id_users_image_saves', through: image_save, foreignKey: "image_id", otherKey: "user_id" });
-  users.belongsToMany(images, { as: 'image_id_images', through: comments, foreignKey: "user_id", otherKey: "image_id" });
-  users.belongsToMany(images, { as: 'image_id_images_image_saves', through: image_save, foreignKey: "user_id", otherKey: "image_id" });
+  images.belongsToMany(users, { as: 'user_id_users', through: image_save, foreignKey: "image_id", otherKey: "user_id" });
+  users.belongsToMany(images, { as: 'image_id_images', through: image_save, foreignKey: "user_id", otherKey: "image_id" });
   comments.belongsTo(images, { as: "image", foreignKey: "image_id"});
   images.hasMany(comments, { as: "comments", foreignKey: "image_id"});
   image_save.belongsTo(images, { as: "image", foreignKey: "image_id"});

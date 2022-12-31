@@ -1,0 +1,60 @@
+paths:
+    /comment-management/comments:
+        post:
+            tags:
+                - Comment
+            summary: Create comment
+            produces:
+                - application/json
+            parameters:
+                - in: body
+                  name: content
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Comment"
+            responses:
+                200:
+                    description: OK
+        get:
+            tags:
+                - Comment
+            summary: Get all comment
+            responses:
+                200:
+                    description: OK
+    /comment-management/comments/{id}:
+        parameters:
+            - in: path
+              name: id
+              type: integer
+              required: true
+        get:
+            tags:
+                - Comment
+            summary: Get list commnet  by image id
+            description: ID of image
+            responses:
+                200:
+                    description: OK
+        delete:
+            tags:
+                - Comment
+            summary: Delete comment
+            description: ID of comment
+            responses:
+                200:
+                    description: OK
+definitions:
+    Comment:
+        required:
+            - user_id
+            - image_id
+            - content
+        properties:
+            user_id:
+                type: integer
+            image_id:
+                type: integer
+            content:
+                type: string
+                example: phongckm93@gmail.com

@@ -63,31 +63,35 @@ paths:
                 - User
             summary: Update user with give ID
             parameters:
-            - in: body
-              name: user
-              description: User with new values of properties
-              required: true
-              schema: 
-                 $ref: "#/definitions/updateUser"
+                - in: body
+                  name: user
+                  description: User with new values of properties
+                  required: true
+                  schema:
+                      $ref: "#/definitions/updateUser"
             responses:
                 200:
                     description: OK
             security:
                 - ApiKeyAuth: []
     /user-management/avatar/{id}:
+        parameters:
+            - in: path
+              name: id
+              type: integer
+              description: ID of user that we want to find
+              required: true
         post:
             tags:
                 - User
-            summary: creates a new user
+            summary: Upload avatar
             produces:
                 - application/json
             parameters:
-                - in: body
-                  name: sign up
-                  description: It enables a user to create an account
+                - in: formData
+                  name: dataUpload
+                  type: file
                   required: true
-                  schema:
-                      $ref: "#/definitions/signUp"
             responses:
                 200:
                     description: OK
@@ -138,7 +142,7 @@ definitions:
                 type: string
                 example: "1234"
 securityDefinitions:
-      ApiKeyAuth:
+    ApiKeyAuth:
         type: apiKey
         in: header
-        name: token      
+        name: token

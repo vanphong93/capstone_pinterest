@@ -10,10 +10,15 @@ class comments extends Sequelize.Model {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    user_id: {
+    comment_id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: 'users',
         key: 'user_id'
@@ -21,8 +26,7 @@ class comments extends Sequelize.Model {
     },
     image_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
+      allowNull: true,
       references: {
         model: 'images',
         key: 'image_id'
@@ -42,8 +46,7 @@ class comments extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "image_id" },
-          { name: "user_id" },
+          { name: "comment_id" },
         ]
       },
       {
@@ -51,6 +54,13 @@ class comments extends Sequelize.Model {
         using: "BTREE",
         fields: [
           { name: "user_id" },
+        ]
+      },
+      {
+        name: "image_id",
+        using: "BTREE",
+        fields: [
+          { name: "image_id" },
         ]
       },
     ]

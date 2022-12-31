@@ -12,8 +12,8 @@ const { upload } = require("../middlewares/upload");
 const imageRoute = express.Router();
 imageRoute.get("/images", getImages);
 imageRoute.get("/images/search", searchImg);
-imageRoute.get("/images/:id", getImgByImgID);
 imageRoute.get("/user/:id", getImgByUserId);
+imageRoute.get("/images/:id", getImgByImgID);
 imageRoute.delete("/images/:id", verifyToken, deleteImage);
 imageRoute.get("/upload/:image", (req, res) => {
     let { image } = req.params;

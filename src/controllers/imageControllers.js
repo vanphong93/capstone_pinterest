@@ -27,10 +27,12 @@ const searchImg = async (req, res) => {
 };
 const uploadImage = async (req, res) => {
     try {
-        let { filename, image_name, description, data_created, user_id } = {
+        let { filename, image_name, description, user_id } = {
             ...req.body,
+
             ...req.file,
         };
+        let data_created = new Date();
         let fullUrl =
             req.protocol +
             "://" +

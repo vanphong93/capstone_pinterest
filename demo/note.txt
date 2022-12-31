@@ -23,6 +23,6 @@ yarn sequelize-auto -h localhost -d clone_pinterest -u root -x 1234 -p 3308 --di
   /getUser userRoute.js (routes)
   function getUser from userControllers.js (controllers)
 
-
+ "start": "pm2 start src/index.js"
   docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=1234 -p 3308:3306 phong93/node25:pintersest
 token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMTIzNCIsImlhdCI6MTY3MDU5MzY2NCwiZXhwIjoxNjcwNjgwMDY0fQ.D3_nTRtVkaFzm6inXXfy_Lq3ml3wJqze73TIhfgoM3I
