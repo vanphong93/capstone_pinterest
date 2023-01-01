@@ -8,7 +8,7 @@ const swaggerDefinition = {
     },
     // host: "localhost:8080",
     //when deploy
-    host: "178.128.222.31:3600",
+    host: "178.128.222.31:3500",
     // host: `${db_host}`,
     basePath: "/api",
 };
