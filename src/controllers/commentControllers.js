@@ -1,8 +1,6 @@
 const { successCode, failCode, errorCode } = require("../config/reponse");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
-const bcrypt = require("bcrypt");
-const { parseToken } = require("../middlewares/baseToken");
 const models = init_models(sequelize);
 const getComment = async (req, res) => {
     try {

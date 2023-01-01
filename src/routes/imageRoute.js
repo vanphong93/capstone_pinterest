@@ -9,6 +9,7 @@ const {
 } = require("../controllers/imageControllers");
 const { verifyToken } = require("../middlewares/baseToken");
 const { upload } = require("../middlewares/upload");
+const { validation } = require("../middlewares/validation");
 const imageRoute = express.Router();
 imageRoute.get("/images", getImages);
 imageRoute.get("/images/search", searchImg);
@@ -26,5 +27,11 @@ imageRoute.get("/upload/:image", (req, res) => {
         }
     });
 });
-imageRoute.post("/upload", upload.single("dataUpload"),verifyToken, uploadImage);
+imageRoute.post(
+    "/upload",
+    upload.single("dataUpload"),
+    verifyToken,
+    validation.emptyUpload,
+    uploadImage
+);
 module.exports = imageRoute;

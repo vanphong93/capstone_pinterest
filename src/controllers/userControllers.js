@@ -15,20 +15,17 @@ const getUser = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         let { id: user_id } = req.params;
-        console.log("user_id: ", user_id);
         let data = await models.users.findOne({ where: { user_id } });
-        if (data) {
-            successCode(res, data, "Lấy dữ liệu thành công");
-        } else {
-            failCode(res, "", "Tài khoản không tồn tại");
-        }
+        data
+            ? successCode(res, data, "Lấy dữ liệu thành công")
+            : failCode(res, data, "Tài khoản không tồn tại");
     } catch (error) {
         errorCode(res, "Lỗi sever");
     }
 };
-const singUp = async (req, res) => {
+const signUp = async (req, res) => {
     try {
-        let { email, pass_word, full_name, age, avatar } = req.body;
+        let { email, pass_word, full_name, age } = req.body;
         let passWordHash = bcrypt.hashSync(pass_word, 10);
         let checkData = await models.users.findOne({
             where: { email },
@@ -41,7 +38,6 @@ const singUp = async (req, res) => {
                 pass_word: passWordHash,
                 full_name,
                 age,
-                avatar,
             });
             successCode(res, data, "Đăng kí thành công");
         }
@@ -100,8 +96,7 @@ const editUser = async (req, res) => {
                     where: { email },
                 });
                 if (checkEmail) {
-                    failCode(res, "", "Email đã đăng kí");
-                    return;
+                    return failCode(res, "", "Email đã đăng kí");
                 }
             }
         }
@@ -169,7 +164,7 @@ const avatarUser = async (req, res) => {
                 { avatar: fullUrl },
                 { where: { user_id } }
             );
-            successCode(res, data, "update");
+            successCode(res, fullUrl, "update");
         } else {
             failCode(res, "", "Tài khoản không tồn tại");
             fs.unlinkSync(process.cwd() + "/public/avatar/" + filename);
@@ -181,7 +176,7 @@ const avatarUser = async (req, res) => {
 module.exports = {
     getUser,
     getUserById,
-    singUp,
+    signUp,
     login,
     editUser,
     deleteUser,

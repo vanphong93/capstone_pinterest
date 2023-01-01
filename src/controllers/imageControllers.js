@@ -1,9 +1,7 @@
 const { successCode, failCode, errorCode } = require("../config/reponse");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
-const bcrypt = require("bcrypt");
 const models = init_models(sequelize);
-const { parseToken } = require("../middlewares/baseToken");
 const fs = require("fs");
 const { Op } = require("sequelize");
 const getImages = async (req, res) => {
