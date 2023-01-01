@@ -64,10 +64,13 @@ const deleteImage = async (req, res) => {
                 req.get("host") +
                 "/api/image-management/upload/";
             URL = URL.replace(splitURL, "");
+            // setTimeout(() => {
+            //     fs.unlink(process.cwd() + "/public/img/" + URL, (err) => {
+            //         return;
+            //     });
+            // }, 5000);
             setTimeout(() => {
-                fs.unlink(process.cwd() + "/public/img/" + URL, (err) => {
-                    return;
-                });
+                fs.unlinkSync(process.cwd() + "/public/img/" + URL);
             }, 5000);
             models.images
                 .destroy({ where: { image_id } })

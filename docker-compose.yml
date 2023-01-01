@@ -1,33 +1,33 @@
 version: '3'
 services:
   mysql_db:
-    image: mysql
-    container_name: mysql_db
+    image: mysql_v2
+    container_name: mysql_db_v2
     env_file: .env
     environment:
       - MYSQL_ROOT_PASSWORD=$DB_PASS
       - MYSQL_DATABASE=$DB_NAME
     ports:
-      - $DB_PORT:3306
+      - $DB_PORT:3310
     volumes:
-      - mysql_db:/var/lib/mysql
+      - mysql_db_v2:/var/lib/mysql
     networks:
       - node-network
   app:
     depends_on:
-      - mysql_db
+      - mysql_db_v2
     build: . # docker build . -t img-name
-    container_name: cons-node
+    container_name: cons-node-2
     env_file: .env
     environment:
-      - DB_HOST=mysql_db
+      - DB_HOST=mysql_db_v2
       - DB_NAME=$DB_NAME
       - DB_USER=$DB_USER
       - DB_PASS=$DB_PASS
       - DB_DIALECT=$DB_DIALECT
       - DB_PORT=$DB_PORT
     ports:
-      - 3500:8080
+      - 3600:8080
     networks:
       - node-network
 volumes:

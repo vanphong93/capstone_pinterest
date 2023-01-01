@@ -1,5 +1,5 @@
 const swaggerJSDoc = require("swagger-jsdoc");
-
+const { db_host } = require("../../config/index");
 const swaggerDefinition = {
     info: {
         title: "REST API for my Project",
@@ -8,7 +8,8 @@ const swaggerDefinition = {
     },
     // host: "localhost:8080",
     //when deploy
-    host: "178.128.222.31:3500",
+    host: "178.128.222.31:3600",
+    // host: `${db_host}`,
     basePath: "/api",
 };
 
