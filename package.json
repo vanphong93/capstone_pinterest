@@ -4,8 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "start": "pm2 start src/index.js",
-        "stop": "pm2 stop src/index.js"
+        "start": "pm2 start src/index.js"
     },
     "dependencies": {
         "bcrypt": "^5.1.0",
