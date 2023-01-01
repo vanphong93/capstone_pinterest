@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mysql_db:
+  mysql_db_v2:
     image: mysql_v2
     container_name: mysql_db_v2
     env_file: .env
@@ -31,7 +31,7 @@ services:
     networks:
       - node-network
 volumes:
-  mysql_db:
+  mysql_db_2:
     driver: local
 networks:
   node-network:
