@@ -14,6 +14,5 @@ const errorCode = (res, message) => {
     res.status(500).json({
         message,
     });
-
 };
 module.exports = { errorCode, failCode, successCode };
