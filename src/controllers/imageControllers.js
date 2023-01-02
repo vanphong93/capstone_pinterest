@@ -3,7 +3,7 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const models = init_models(sequelize);
 const fs = require("fs");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const getImages = async (req, res) => {
     try {
         let data = await models.images.findAll();
@@ -29,24 +29,30 @@ const uploadImage = async (req, res) => {
             ...req.body,
             ...req.file,
         };
-        let data_created = new Date();
-        let fullUrl =
-            req.protocol +
-            "://" +
-            req.get("host") +
-            req.originalUrl +
-            "/" +
-            filename;
-        let data = await models.images.create({
-            image_name,
-            description,
-            data_created,
-            user_id,
-            URL: fullUrl,
-        });
-        successCode(res, data, "success");
+        let checkId = await models.users.findOne({ where: { user_id } });
+
+        if (checkId) {
+            let data_created = new Date();
+            let fullUrl =
+                req.protocol +
+                "://" +
+                req.get("host") +
+                req.originalUrl +
+                "/" +
+                filename;
+            let data = await models.images.create({
+                image_name,
+                description,
+                data_created,
+                user_id,
+                URL: fullUrl,
+            });
+            successCode(res, data, "success");
+        } else {
+            errorCode(res, "Id không tồn tại");
+        }
     } catch (error) {
-        errorCode(res, "Lỗi sever,kiểm tra Id tồn tại");
+        errorCode(res, "Lỗi sever");
     }
 };
 const deleteImage = async (req, res) => {

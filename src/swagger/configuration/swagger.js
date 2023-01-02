@@ -6,9 +6,9 @@ const swaggerDefinition = {
         version: "1.0.0",
         description: "This is the REST API for my Project",
     },
-    host: "localhost:8080",
+    // host: "localhost:8080",
     //when deploy
-    // host: "178.128.222.31:3500",
+    host: "178.128.222.31:3500",
     basePath: "/api",
 };
 

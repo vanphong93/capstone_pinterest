@@ -46,19 +46,23 @@ const deleteComment = async (req, res) => {
 const createCommnet = async (req, res) => {
     try {
         let { user_id, image_id, content } = req.body;
-        models.comments
-            .create({
+        let checkUser = await models.users.findOne({ where: { user_id } });
+        let checkImage = await models.images.findOne({ where: { image_id } });
+        if (checkUser && checkImage) {
+            let data = await models.comments.create({
                 user_id,
                 image_id,
                 content,
                 comment_date: new Date(),
-            })
-            .then((result) => {
-                successCode(res, result, "thành công");
-            })
-            .catch((err) => {
-                failCode(res, "", "kiểm tra Id tồn tại");
             });
+            successCode(res, data, "Thành công");
+        } else if (!checkUser && !checkImage) {
+            failCode(res, "", "kiểm tra User,Image tồn tại");
+        } else if (!checkUser) {
+            failCode(res, "", "kiểm tra User tồn tại");
+        } else {
+            failCode(res, "", "kiểm tra Image tồn tại");
+        }
     } catch (error) {
         errorCode(res, "Lỗi sever");
     }

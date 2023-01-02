@@ -160,11 +160,12 @@ const avatarUser = async (req, res) => {
                     );
                 }, 5000);
             }
-            await models.users.update(
+            let data = await models.users.update(
                 { avatar: fullUrl },
                 { where: { user_id } }
             );
-            successCode(res, fullUrl, "update");
+
+            data && successCode(res, fullUrl, "update");
         } else {
             failCode(res, "", "Tài khoản không tồn tại");
             fs.unlinkSync(process.cwd() + "/public/avatar/" + filename);
