@@ -1,3 +1,4 @@
+const types = ["image/png", "image/jpeg", "image/png"];
 const isEmpty = (object) => {
     for (const key in object) {
         if (!object[key]) {
@@ -40,6 +41,18 @@ const validation = {
             res.status(401).send({ message: "Kiểm tra dữ liệu trống" });
         } else {
             next();
+        }
+    },
+    sizeAndType: (req, res, next) => {
+        let { mimetype, size } = req.file;
+        if (types.includes(mimetype)) {
+            if (size > 51200000) {
+                res.status(401).send({ message: "Kích thước ảnh nhỏ hơn 5mb" });
+            } else {
+                next();
+            }
+        } else {
+            res.status(401).send({ message: "Kiểu dữ liệu jpg png jpeg" });
         }
     },
 };

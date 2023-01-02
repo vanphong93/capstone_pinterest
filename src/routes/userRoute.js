@@ -22,6 +22,7 @@ userRoute.post(
     "/avatar/:id",
     avatar.single("dataUpload"),
     verifyToken,
+    validation.sizeAndType,
     avatarUser
 );
 userRoute.get("/avatar/:id/:file", (req, res) => {

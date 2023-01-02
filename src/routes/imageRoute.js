@@ -32,6 +32,7 @@ imageRoute.post(
     upload.single("dataUpload"),
     verifyToken,
     validation.emptyUpload,
+    validation.sizeAndType,
     uploadImage
 );
 module.exports = imageRoute;
