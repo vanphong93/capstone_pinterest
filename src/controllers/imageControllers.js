@@ -27,7 +27,6 @@ const uploadImage = async (req, res) => {
     try {
         let { filename, image_name, description, user_id } = {
             ...req.body,
-
             ...req.file,
         };
         let data_created = new Date();

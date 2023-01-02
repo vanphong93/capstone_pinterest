@@ -160,7 +160,7 @@ const avatarUser = async (req, res) => {
                     );
                 }, 5000);
             }
-            let data = await models.users.update(
+            await models.users.update(
                 { avatar: fullUrl },
                 { where: { user_id } }
             );
