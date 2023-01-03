@@ -9,6 +9,7 @@ const commentRoute = express.Router();
 const { verifyToken } = require("../middlewares/baseToken");
 const { validation } = require("../middlewares/validation");
 commentRoute.get("/comments", getComment);
+commentRoute.get("/check", getComment);
 commentRoute.get("/comments/:id", getCommentByImg);
 commentRoute.delete("/comments/:id", verifyToken, deleteComment);
 commentRoute.post(

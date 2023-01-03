@@ -24,6 +24,14 @@ paths:
             responses:
                 200:
                     description: OK
+    /comment-management/check:
+        get:
+            tags:
+                - Comment
+            summary: Get all comment
+            responses:
+                200:
+                    description: OK
     /comment-management/comments/{id}:
         parameters:
             - in: path
