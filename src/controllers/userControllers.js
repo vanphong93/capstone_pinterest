@@ -150,13 +150,16 @@ const avatarUser = async (req, res) => {
             if (delete_avatar) {
                 delete_avatar = delete_avatar.replace(Url, "");
                 setTimeout(() => {
-                    fs.unlink(
-                        process.cwd() + "/public/avatar/" + delete_avatar,
-                        (err) => {
-                            if (err) {
-                                return;
-                            }
-                        }
+                    // fs.unlink(
+                    //     process.cwd() + "/public/avatar/" + delete_avatar,
+                    //     (err) => {
+                    //         if (err) {
+                    //             return;
+                    //         }
+                    //     }
+                    // );
+                    fs.unlinkSync(
+                        process.cwd() + "/public/avatar/" + delete_avatar
                     );
                 }, 5000);
             }
