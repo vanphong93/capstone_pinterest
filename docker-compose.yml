@@ -31,7 +31,7 @@ services:
     networks:
       - node-network
 volumes:
-  mysql_db:
+  mysql_air:
     driver: local
 networks:
   node-network:
