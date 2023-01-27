@@ -2,7 +2,7 @@ version: '3'
 services:
   mysql_db:
     image: mysql
-    container_name: mysql_db
+    container_name: front_end
     env_file: .env
     environment:
       - MYSQL_ROOT_PASSWORD=$DB_PASS
